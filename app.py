@@ -4,7 +4,7 @@ import joblib
 # -------------------- PAGE CONFIG --------------------
 st.set_page_config(page_title="AI Fake News Detector", layout="centered")
 
-# -------------------- AI THEME + BACKGROUND --------------------
+# -------------------- AI THEME --------------------
 st.markdown("""
 <style>
 .stApp {
@@ -67,7 +67,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     if st.button("🟢 Try Real Example"):
-        st.session_state.news_input = "Government announces new policy for economic growth and development."
+        st.session_state.news_input = "WASHINGTON (Reuters) - The government announced a new economic policy aimed at boosting growth and improving infrastructure across the country."
 
 with col2:
     if st.button("🔴 Try Fake Example"):
