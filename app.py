@@ -1,8 +1,13 @@
 import streamlit as st
 import joblib
+import pandas as pd
 
 # -------------------- PAGE CONFIG --------------------
 st.set_page_config(page_title="AI Fake News Detector", layout="centered")
+
+# -------------------- LOAD DATASET --------------------
+fake_df = pd.read_csv("Fake.csv")
+true_df = pd.read_csv("True.csv")
 
 # -------------------- AI THEME --------------------
 st.markdown("""
@@ -67,11 +72,13 @@ col1, col2 = st.columns(2)
 
 with col1:
     if st.button("🟢 Try Real Example"):
-        st.session_state.news_input = "WASHINGTON (Reuters) - The government announced a new economic policy aimed at boosting growth and improving infrastructure across the country."
+        random_real = true_df.sample(1)["text"].values[0]
+        st.session_state.news_input = random_real[:500]
 
 with col2:
     if st.button("🔴 Try Fake Example"):
-        st.session_state.news_input = "Breaking!!! Secret cure discovered but hidden by media!!!"
+        random_fake = fake_df.sample(1)["text"].values[0]
+        st.session_state.news_input = random_fake[:500]
 
 # -------------------- INPUT --------------------
 news_input = st.text_area("📝 Enter News Article:", value=st.session_state.news_input, height=200)
